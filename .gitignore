@@ -35,7 +35,8 @@ Thumbs.db
 *.swo
 *~
 
-# Docker local overrides (optional)
+# Docker (local only — not pushed)
+docker-compose.yml
 docker-compose.override.yml
 
 # Postman
