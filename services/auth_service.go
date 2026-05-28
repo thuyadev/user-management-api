@@ -4,8 +4,8 @@ import (
 	"errors"
 	"time"
 
-	"user-management-api/auth"
 	"user-management-api/models"
+	"user-management-api/policies"
 	"user-management-api/repositories"
 	"user-management-api/utils"
 
@@ -45,7 +45,7 @@ func (s *authService) buildAuthResponse(user *models.User) (models.AuthTokenResp
 		return models.AuthTokenResponse{}, err
 	}
 
-	permissions := auth.PermissionsForRole(user.Role)
+	permissions := policies.PermissionsForRole(user.Role)
 	expiresIn := int(time.Until(expiresAt).Seconds())
 	if expiresIn < 0 {
 		expiresIn = 0

@@ -33,7 +33,7 @@ import (
 
 // @securityDefinitions.apikey ApiKeyAuth
 // @in header
-// @name X-API-Key
+// @name X-UMA-a394985d00e67ddf
 // @description API key required for all /api/v1 routes
 
 // @securityDefinitions.apikey BearerAuth

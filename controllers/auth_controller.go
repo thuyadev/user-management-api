@@ -4,9 +4,9 @@ import (
 	"errors"
 	"net/http"
 
-	"user-management-api/auth"
 	"user-management-api/middleware"
 	"user-management-api/models"
+	"user-management-api/policies"
 	"user-management-api/services"
 	"user-management-api/utils"
 
@@ -101,7 +101,7 @@ func (ctrl *AuthController) Me(c *gin.Context) {
 		"user_id":     middleware.GetUserID(c),
 		"email":       c.GetString(middleware.ContextUserEmailKey),
 		"role":        role,
-		"permissions": auth.PermissionsForRole(role),
+		"permissions": policies.PermissionsForRole(role),
 	})
 }
 
@@ -114,5 +114,5 @@ func (ctrl *AuthController) Me(c *gin.Context) {
 // @Security     ApiKeyAuth
 // @Router       /api/v1/auth/roles [get]
 func (ctrl *AuthController) Roles(c *gin.Context) {
-	utils.Success(c, http.StatusOK, "Roles and permissions", auth.AllRoles())
+	utils.Success(c, http.StatusOK, "Roles and permissions", policies.AllRoles())
 }

@@ -3,7 +3,7 @@ package services
 import (
 	"testing"
 
-	"user-management-api/auth"
+	"user-management-api/policies"
 	"user-management-api/database"
 	"user-management-api/models"
 	"user-management-api/repositories"
@@ -67,7 +67,7 @@ func TestAuthServiceLogin(t *testing.T) {
 	if len(resp.Permissions) != 6 {
 		t.Errorf("expected 6 permissions, got %d", len(resp.Permissions))
 	}
-	if !auth.HasPermission(resp.Role, auth.PermUsersManage) {
+	if !policies.HasPermission(resp.Role, policies.PermUsersManage) {
 		t.Error("admin login should include users.manage")
 	}
 

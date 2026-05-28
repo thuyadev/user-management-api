@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"user-management-api/auth"
+	"user-management-api/policies"
 
 	"github.com/gin-gonic/gin"
 )
@@ -23,25 +23,25 @@ func TestPermissionMiddleware(t *testing.T) {
 		{
 			name:       "admin can manage users",
 			role:       "admin",
-			permission: auth.PermUsersManage,
+			permission: policies.PermUsersManage,
 			wantStatus: http.StatusOK,
 		},
 		{
 			name:       "user cannot manage users",
 			role:       "user",
-			permission: auth.PermUsersManage,
+			permission: policies.PermUsersManage,
 			wantStatus: http.StatusForbidden,
 		},
 		{
 			name:       "user can view categories",
 			role:       "user",
-			permission: auth.PermCategoriesView,
+			permission: policies.PermCategoriesView,
 			wantStatus: http.StatusOK,
 		},
 		{
 			name:       "user cannot manage categories",
 			role:       "user",
-			permission: auth.PermCategoriesManage,
+			permission: policies.PermCategoriesManage,
 			wantStatus: http.StatusForbidden,
 		},
 	}

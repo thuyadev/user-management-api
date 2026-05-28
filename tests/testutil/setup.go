@@ -20,9 +20,10 @@ import (
 )
 
 const (
-	TestJWTSecret = "test-jwt-secret"
-	TestAPIKey    = "test-api-key"
-	TestPassword  = "password123"
+	TestJWTSecret   = "test-jwt-secret"
+	TestAPIKey      = "test-api-key"
+	TestAPIKeyHeader = "X-UMA-a394985d00e67ddf"
+	TestPassword    = "password123"
 )
 
 type TestApp struct {
@@ -75,7 +76,7 @@ func SetupTestApp(t *testing.T) *TestApp {
 		JWTExpiryHours: 24,
 		APIKeyRequired: true,
 		APIKey:         TestAPIKey,
-		APIKeyHeader:   "X-API-Key",
+		APIKeyHeader:   TestAPIKeyHeader,
 		AIEnabled:      false,
 		SwaggerEnabled: false,
 	}
@@ -123,7 +124,7 @@ func (a *TestApp) Request(method, path string, body interface{}, token string) *
 
 	req := httptest.NewRequest(method, path, reader)
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("X-API-Key", TestAPIKey)
+	req.Header.Set(TestAPIKeyHeader, TestAPIKey)
 	if token != "" {
 		req.Header.Set("Authorization", "Bearer "+token)
 	}

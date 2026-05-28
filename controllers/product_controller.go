@@ -32,7 +32,7 @@ func NewProductController(productService services.ProductService, aiService serv
 // @Produce      json
 // @Param        page         query  int     false  "Page number"       default(1)
 // @Param        per_page     query  int     false  "Items per page"    default(10)
-// @Param        search       query  string  false  "Search by name or description"
+// @Param        search       query  string  false  "Search by name"
 // @Param        category_id  query  int     false  "Filter by category ID"
 // @Success      200  {object}  models.SwaggerPaginatedProductsResponse
 // @Failure      401  {object}  models.SwaggerErrorResponse

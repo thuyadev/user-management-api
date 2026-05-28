@@ -49,7 +49,7 @@ func (r *productRepository) List(page, perPage int, search string, categoryID ui
 	query := r.db.Model(&models.Product{}).Preload("Category")
 	if search != "" {
 		pattern := "%" + search + "%"
-		query = query.Where("LOWER(name) LIKE LOWER(?) OR LOWER(description) LIKE LOWER(?)", pattern, pattern)
+		query = query.Where("LOWER(name) LIKE LOWER(?)", pattern)
 	}
 	if categoryID > 0 {
 		query = query.Where("category_id = ?", categoryID)
@@ -60,7 +60,7 @@ func (r *productRepository) List(page, perPage int, search string, categoryID ui
 	}
 
 	offset := (page - 1) * perPage
-	if err := query.Offset(offset).Limit(perPage).Order("id ASC").Find(&products).Error; err != nil {
+	if err := query.Offset(offset).Limit(perPage).Order("created_at DESC").Find(&products).Error; err != nil {
 		return nil, 0, err
 	}
 

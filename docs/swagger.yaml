@@ -1156,7 +1156,7 @@ securityDefinitions:
   ApiKeyAuth:
     description: API key required for all /api/v1 routes
     in: header
-    name: X-API-Key
+    name: X-UMA-a394985d00e67ddf
     type: apiKey
   BearerAuth:
     description: 'JWT token. Format: Bearer {token}'

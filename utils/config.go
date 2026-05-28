@@ -79,8 +79,8 @@ func LoadConfig() *Config {
 
 		SwaggerEnabled:  getEnvBool("SWAGGER_ENABLED", true),
 		SwaggerPath:     getEnv("SWAGGER_PATH", "/swagger"),
-		SwaggerUser:     getEnv("SWAGGER_USER", "swagger"),
-		SwaggerPassword: getEnv("SWAGGER_PASSWORD", "swagger"),
+		SwaggerUser:     getEnv("SWAGGER_USER", ""),
+		SwaggerPassword: getEnv("SWAGGER_PASSWORD", ""),
 	}
 }
 

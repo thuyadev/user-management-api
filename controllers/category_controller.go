@@ -32,7 +32,7 @@ func NewCategoryController(categoryService services.CategoryService, aiService s
 // @Produce      json
 // @Param        page      query  int     false  "Page number"     default(1)
 // @Param        per_page  query  int     false  "Items per page"  default(10)
-// @Param        search    query  string  false  "Search by name or description"
+// @Param        search    query  string  false  "Search by name"
 // @Success      200  {object}  models.SwaggerPaginatedCategoriesResponse
 // @Failure      401  {object}  models.SwaggerErrorResponse
 // @Failure      403  {object}  models.SwaggerErrorResponse

@@ -49,7 +49,7 @@ func (r *categoryRepository) List(page, perPage int, search string) ([]models.Ca
 	query := r.db.Model(&models.Category{})
 	if search != "" {
 		pattern := "%" + search + "%"
-		query = query.Where("LOWER(name) LIKE LOWER(?) OR LOWER(description) LIKE LOWER(?)", pattern, pattern)
+		query = query.Where("LOWER(name) LIKE LOWER(?)", pattern)
 	}
 
 	if err := query.Count(&total).Error; err != nil {
@@ -57,7 +57,7 @@ func (r *categoryRepository) List(page, perPage int, search string) ([]models.Ca
 	}
 
 	offset := (page - 1) * perPage
-	if err := query.Offset(offset).Limit(perPage).Order("id ASC").Find(&categories).Error; err != nil {
+	if err := query.Offset(offset).Limit(perPage).Order("created_at DESC").Find(&categories).Error; err != nil {
 		return nil, 0, err
 	}
 

@@ -1,8 +1,8 @@
-package auth
+package policies
 
 import "user-management-api/models"
 
-// Permission names follow a resource.action pattern (similar to Spatie).
+// Permission names follow a resource.action pattern (similar to Spatie / Laravel Policies).
 const (
 	PermUsersManage      = "users.manage"
 	PermCategoriesView   = "categories.view"

@@ -28,7 +28,7 @@ func NewUserController(userService services.UserService) *UserController {
 // @Produce      json
 // @Param        page      query  int     false  "Page number"       default(1)
 // @Param        per_page  query  int     false  "Items per page"    default(10)
-// @Param        search    query  string  false  "Search by name or email"
+// @Param        search    query  string  false  "Search by name"
 // @Success      200  {object}  models.SwaggerPaginatedUsersResponse
 // @Failure      401  {object}  models.SwaggerErrorResponse
 // @Failure      403  {object}  models.SwaggerErrorResponse

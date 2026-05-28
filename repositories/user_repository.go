@@ -58,7 +58,7 @@ func (r *userRepository) List(page, perPage int, search string) ([]models.User, 
 	query := r.db.Model(&models.User{})
 	if search != "" {
 		pattern := "%" + search + "%"
-		query = query.Where("LOWER(name) LIKE LOWER(?) OR LOWER(email) LIKE LOWER(?)", pattern, pattern)
+		query = query.Where("LOWER(name) LIKE LOWER(?)", pattern)
 	}
 
 	if err := query.Count(&total).Error; err != nil {
@@ -66,7 +66,7 @@ func (r *userRepository) List(page, perPage int, search string) ([]models.User, 
 	}
 
 	offset := (page - 1) * perPage
-	if err := query.Offset(offset).Limit(perPage).Order("id ASC").Find(&users).Error; err != nil {
+	if err := query.Offset(offset).Limit(perPage).Order("created_at DESC").Find(&users).Error; err != nil {
 		return nil, 0, err
 	}
 

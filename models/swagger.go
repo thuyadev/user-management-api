@@ -45,6 +45,18 @@ type SwaggerPaginatedLogsResponse struct {
 	Meta    SwaggerPaginationMeta `json:"meta"`
 }
 
+type SwaggerLogEventStatsResponse struct {
+	Success bool           `json:"success" example:"true"`
+	Message string         `json:"message" example:"Event statistics retrieved"`
+	Data    []LogEventStat `json:"data"`
+}
+
+type SwaggerLogDailyStatsResponse struct {
+	Success bool           `json:"success" example:"true"`
+	Message string         `json:"message" example:"Daily activity statistics retrieved"`
+	Data    []LogDailyStat `json:"data"`
+}
+
 type SwaggerAuthTokenSuccessResponse struct {
 	Success bool              `json:"success" example:"true"`
 	Message string            `json:"message" example:"Login successful"`

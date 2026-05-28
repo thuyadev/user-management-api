@@ -1789,7 +1789,7 @@ const docTemplate = `{
         "ApiKeyAuth": {
             "description": "API key required for all /api/v1 routes",
             "type": "apiKey",
-            "name": "X-API-Key",
+            "name": "X-UMA-a394985d00e67ddf",
             "in": "header"
         },
         "BearerAuth": {
