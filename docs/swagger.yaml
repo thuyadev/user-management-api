@@ -1,0 +1,1166 @@
+basePath: /
+definitions:
+  controllers.AIGenerateDescriptionRequest:
+    properties:
+      category:
+        minLength: 2
+        type: string
+      name:
+        minLength: 2
+        type: string
+    required:
+    - category
+    - name
+    type: object
+  controllers.AISuggestCategoryRequest:
+    properties:
+      keywords:
+        minLength: 2
+        type: string
+    required:
+    - keywords
+    type: object
+  models.AuthTokenResponse:
+    properties:
+      expires_at:
+        type: string
+      expires_in:
+        type: integer
+      permissions:
+        items:
+          type: string
+        type: array
+      role:
+        type: string
+      token:
+        type: string
+      user:
+        $ref: '#/definitions/models.UserResponse'
+    type: object
+  models.Category:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      products:
+        items:
+          $ref: '#/definitions/models.Product'
+        type: array
+      updated_at:
+        type: string
+    type: object
+  models.CreateCategoryRequest:
+    properties:
+      description:
+        maxLength: 1000
+        type: string
+      name:
+        maxLength: 255
+        minLength: 2
+        type: string
+    required:
+    - name
+    type: object
+  models.CreateProductRequest:
+    properties:
+      category_id:
+        type: integer
+      description:
+        maxLength: 2000
+        type: string
+      name:
+        maxLength: 255
+        minLength: 2
+        type: string
+      price:
+        type: number
+      stock:
+        minimum: 0
+        type: integer
+    required:
+    - category_id
+    - name
+    - price
+    - stock
+    type: object
+  models.CreateUserRequest:
+    properties:
+      email:
+        type: string
+      name:
+        maxLength: 255
+        minLength: 2
+        type: string
+      password:
+        minLength: 6
+        type: string
+      role:
+        enum:
+        - admin
+        - user
+        type: string
+    required:
+    - email
+    - name
+    - password
+    type: object
+  models.LoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  models.Product:
+    properties:
+      category:
+        $ref: '#/definitions/models.Category'
+      category_id:
+        type: integer
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      price:
+        type: number
+      stock:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.RegisterRequest:
+    properties:
+      email:
+        type: string
+      name:
+        maxLength: 255
+        minLength: 2
+        type: string
+      password:
+        minLength: 6
+        type: string
+    required:
+    - email
+    - name
+    - password
+    type: object
+  models.SwaggerAIDescriptionResponse:
+    properties:
+      data:
+        properties:
+          description:
+            type: string
+        type: object
+      message:
+        example: Description generated
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  models.SwaggerAISuggestResponse:
+    properties:
+      data:
+        properties:
+          name:
+            example: Fitness & Gym Equipment
+            type: string
+        type: object
+      message:
+        example: Category name suggested
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  models.SwaggerAuthTokenSuccessResponse:
+    properties:
+      data:
+        $ref: '#/definitions/models.AuthTokenResponse'
+      message:
+        example: Login successful
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  models.SwaggerCategorySuccessResponse:
+    properties:
+      data:
+        $ref: '#/definitions/models.Category'
+      message:
+        example: Category retrieved
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  models.SwaggerErrorResponse:
+    properties:
+      errors: {}
+      message:
+        example: Unauthenticated
+        type: string
+      success:
+        example: false
+        type: boolean
+    type: object
+  models.SwaggerHealthResponse:
+    properties:
+      data:
+        properties:
+          status:
+            example: healthy
+            type: string
+        type: object
+      message:
+        example: API is running
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  models.SwaggerMeResponse:
+    properties:
+      data:
+        properties:
+          email:
+            example: admin@example.com
+            type: string
+          permissions:
+            items:
+              type: string
+            type: array
+          role:
+            example: admin
+            type: string
+          user_id:
+            example: 1
+            type: integer
+        type: object
+      message:
+        example: Profile retrieved
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  models.SwaggerPaginatedCategoriesResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/models.Category'
+        type: array
+      meta:
+        $ref: '#/definitions/models.SwaggerPaginationMeta'
+      success:
+        example: true
+        type: boolean
+    type: object
+  models.SwaggerPaginatedLogsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/models.UserLog'
+        type: array
+      meta:
+        $ref: '#/definitions/models.SwaggerPaginationMeta'
+      success:
+        example: true
+        type: boolean
+    type: object
+  models.SwaggerPaginatedProductsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/models.Product'
+        type: array
+      meta:
+        $ref: '#/definitions/models.SwaggerPaginationMeta'
+      success:
+        example: true
+        type: boolean
+    type: object
+  models.SwaggerPaginatedUsersResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/models.UserResponse'
+        type: array
+      meta:
+        $ref: '#/definitions/models.SwaggerPaginationMeta'
+      success:
+        example: true
+        type: boolean
+    type: object
+  models.SwaggerPaginationMeta:
+    properties:
+      page:
+        example: 1
+        type: integer
+      per_page:
+        example: 10
+        type: integer
+      total:
+        example: 3
+        type: integer
+      total_pages:
+        example: 1
+        type: integer
+    type: object
+  models.SwaggerProductSuccessResponse:
+    properties:
+      data:
+        $ref: '#/definitions/models.Product'
+      message:
+        example: Product retrieved
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  models.SwaggerRolesResponse:
+    properties:
+      data:
+        additionalProperties:
+          items:
+            type: string
+          type: array
+        type: object
+      message:
+        example: Roles and permissions
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  models.SwaggerSuccessResponse:
+    properties:
+      data: {}
+      message:
+        example: OK
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  models.SwaggerUserSuccessResponse:
+    properties:
+      data:
+        $ref: '#/definitions/models.UserResponse'
+      message:
+        example: User retrieved
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  models.UpdateCategoryRequest:
+    properties:
+      description:
+        maxLength: 1000
+        type: string
+      name:
+        maxLength: 255
+        minLength: 2
+        type: string
+    type: object
+  models.UpdateProductRequest:
+    properties:
+      category_id:
+        type: integer
+      description:
+        maxLength: 2000
+        type: string
+      name:
+        maxLength: 255
+        minLength: 2
+        type: string
+      price:
+        type: number
+      stock:
+        minimum: 0
+        type: integer
+    type: object
+  models.UpdateUserRequest:
+    properties:
+      email:
+        type: string
+      name:
+        maxLength: 255
+        minLength: 2
+        type: string
+      password:
+        minLength: 6
+        type: string
+      role:
+        enum:
+        - admin
+        - user
+        type: string
+    type: object
+  models.UserLog:
+    properties:
+      created_at:
+        type: string
+      data:
+        additionalProperties: true
+        type: object
+      event:
+        type: string
+      id:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  models.UserResponse:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      role:
+        type: string
+      updated_at:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: admin@example.com
+    name: API Support
+  description: REST API with JWT auth, role permissions, categories, products, and
+    MongoDB activity logs.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: http://swagger.io/terms/
+  title: User Management API
+  version: "1.0"
+paths:
+  /api/v1/admin/categories:
+    get:
+      description: Paginated category list. Requires categories.view permission.
+      parameters:
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Items per page
+        in: query
+        name: per_page
+        type: integer
+      - description: Search by name or description
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerPaginatedCategoriesResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: List categories
+      tags:
+      - Categories
+    post:
+      consumes:
+      - application/json
+      description: Create a new category. Requires categories.manage permission (admin
+        only).
+      parameters:
+      - description: Category data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateCategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.SwaggerCategorySuccessResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Create category
+      tags:
+      - Categories
+  /api/v1/admin/categories/{id}:
+    delete:
+      description: Soft-delete a category. Requires categories.manage permission.
+      parameters:
+      - description: Category ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerSuccessResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Delete category
+      tags:
+      - Categories
+    get:
+      description: Get a single category by ID. Requires categories.view permission.
+      parameters:
+      - description: Category ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerCategorySuccessResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get category
+      tags:
+      - Categories
+    put:
+      consumes:
+      - application/json
+      description: Update an existing category. Requires categories.manage permission.
+      parameters:
+      - description: Category ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Category data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateCategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerCategorySuccessResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Update category
+      tags:
+      - Categories
+  /api/v1/admin/categories/ai/suggest:
+    post:
+      consumes:
+      - application/json
+      description: Suggest a category name from keywords. Requires categories.manage
+        permission.
+      parameters:
+      - description: Keywords
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.AISuggestCategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerAISuggestResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: AI suggest category name
+      tags:
+      - Categories
+  /api/v1/admin/logs:
+    get:
+      description: Paginated user activity logs from MongoDB. Requires logs.view permission
+        (admin only).
+      parameters:
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Items per page
+        in: query
+        name: per_page
+        type: integer
+      - description: Filter by user ID
+        in: query
+        name: user_id
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerPaginatedLogsResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: List activity logs
+      tags:
+      - Logs
+  /api/v1/admin/products:
+    get:
+      description: Paginated product list. Requires products.view permission.
+      parameters:
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Items per page
+        in: query
+        name: per_page
+        type: integer
+      - description: Search by name or description
+        in: query
+        name: search
+        type: string
+      - description: Filter by category ID
+        in: query
+        name: category_id
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerPaginatedProductsResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: List products
+      tags:
+      - Products
+    post:
+      consumes:
+      - application/json
+      description: Create a new product. Requires products.manage permission (admin
+        only).
+      parameters:
+      - description: Product data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateProductRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.SwaggerProductSuccessResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Create product
+      tags:
+      - Products
+  /api/v1/admin/products/{id}:
+    delete:
+      description: Soft-delete a product. Requires products.manage permission.
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerSuccessResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Delete product
+      tags:
+      - Products
+    get:
+      description: Get a single product by ID. Requires products.view permission.
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerProductSuccessResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get product
+      tags:
+      - Products
+    put:
+      consumes:
+      - application/json
+      description: Update an existing product. Requires products.manage permission.
+      parameters:
+      - description: Product ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Product data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateProductRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerProductSuccessResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Update product
+      tags:
+      - Products
+  /api/v1/admin/products/ai/description:
+    post:
+      consumes:
+      - application/json
+      description: Generate a product description from name and category. Requires
+        products.manage permission.
+      parameters:
+      - description: Product info
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.AIGenerateDescriptionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerAIDescriptionResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: AI generate product description
+      tags:
+      - Products
+  /api/v1/admin/users:
+    get:
+      description: Paginated user list. Requires users.manage permission (admin only).
+      parameters:
+      - default: 1
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - default: 10
+        description: Items per page
+        in: query
+        name: per_page
+        type: integer
+      - description: Search by name or email
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerPaginatedUsersResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: List users
+      tags:
+      - Users
+    post:
+      consumes:
+      - application/json
+      description: Create a new user. Requires users.manage permission.
+      parameters:
+      - description: User data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.SwaggerUserSuccessResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Create user
+      tags:
+      - Users
+  /api/v1/admin/users/{id}:
+    delete:
+      description: Soft-delete a user. Requires users.manage permission.
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerSuccessResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Delete user
+      tags:
+      - Users
+    get:
+      description: Get a single user by ID. Requires users.manage permission.
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerUserSuccessResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get user
+      tags:
+      - Users
+    put:
+      consumes:
+      - application/json
+      description: Update an existing user. Requires users.manage permission.
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: User data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerUserSuccessResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Update user
+      tags:
+      - Users
+  /api/v1/auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate with email and password. Returns JWT token, role,
+        and permissions.
+      parameters:
+      - description: Login credentials
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerAuthTokenSuccessResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Login
+      tags:
+      - Auth
+  /api/v1/auth/me:
+    get:
+      description: Returns authenticated user id, email, role, and permissions.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerMeResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Current user profile
+      tags:
+      - Auth
+  /api/v1/auth/register:
+    post:
+      consumes:
+      - application/json
+      description: 'Create a new user account (role: user). Returns JWT token.'
+      parameters:
+      - description: Registration data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.SwaggerAuthTokenSuccessResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Register
+      tags:
+      - Auth
+  /api/v1/auth/roles:
+    get:
+      description: Returns all supported roles and their permission lists.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerRolesResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: List roles and permissions
+      tags:
+      - Auth
+  /health:
+    get:
+      description: Public health check endpoint. No API key required.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerHealthResponse'
+      summary: Health check
+      tags:
+      - Health
+securityDefinitions:
+  ApiKeyAuth:
+    description: API key required for all /api/v1 routes
+    in: header
+    name: X-API-Key
+    type: apiKey
+  BearerAuth:
+    description: 'JWT token. Format: Bearer {token}'
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
